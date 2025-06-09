@@ -1,0 +1,19 @@
+{
+  "name": "farm",
+  "version": "1.0.0",
+  "main": "FormSubmission.js",
+  "scripts": {
+    "start": "node FormSubmission.js",
+    "dev": "nodemon FormSubmission.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  },
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^5.1.0"
+  }
+}
