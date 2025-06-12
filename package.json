@@ -1,10 +1,11 @@
 {
   "name": "farm",
   "version": "1.0.0",
-  "main": "FormSubmission.js",
+  "main": "app.js",
+  "type": "module",
   "scripts": {
-    "start": "node FormSubmission.js",
-    "dev": "nodemon FormSubmission.js"
+    "start": "node app.js",
+    "dev": "nodemon app.js"
   },
   "keywords": [],
   "author": "",

@@ -1,13 +1,15 @@
+//This hsows the use of event emitter
+
 const express = require("express");
 const EventEmitter = require("events");
-
+ 
 const app = express();
 app.use(express.urlencoded({ extended: true })); // Parse form data
 
-// Create EventEmitter
+// Create an instance of EventEmitter
 const formEvents = new EventEmitter();
 
-// Listen for "formSubmitted" event
+// define an event listener to Listen for "formSubmitted" event
 formEvents.on("formSubmitted", (name) => {
   console.log(`Form submitted by: ${name}`);
 });
