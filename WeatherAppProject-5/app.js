@@ -10,13 +10,24 @@ const BASE_URL = `http://api.openweathermap.org/data/2.5/weather`;
 
 
 const getweather = async (city) => {
-    const url = `${BASE_URL}?q=${city}&appid=${API_KEY}&units=metric`;
+    const url = `${BASE_URL}?q=${city}&appid=${API_KEY}`;
   
 try{
-    const weatherData = await fetch(url);
-    const weather = await weatherData.json();
-    console.log(`The temperature in ${city} is ${weather.main.temp} degrees Celsius.`);
-    console.log(`The weather conditions in ${city} are ${weather.weather[0].description}.`);
+    const response = await fetch(url);
+    if (!response.ok) {
+        throw new Error(`City not found. Please Check the city name.`);
+    }
+    const weatherData = await response.json();
+   console.log(weatherData);
+
+   console.log(`\nWeather Information :`);
+   console.log(`City: ${weatherData.name}`);
+   console.log(`Temperature: ${weatherData.main.temp}°C`);
+   console.log(`Description: ${weatherData.weather[0].description}`);
+   console.log(`Humidity: ${weatherData.main.humidity}%`);
+   console.log(`Wind Speed: ${weatherData.wind.speed} m/s\n`);
+   
+   
 } catch (error) {
     console.error( error);
 }
