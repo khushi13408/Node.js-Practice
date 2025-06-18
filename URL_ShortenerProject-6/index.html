@@ -27,15 +27,36 @@
    <ul id="shortened-urls"></ul>
     </div>
     <script>
-        // JavaScript code
-        document.getElementById("shorten-form").addEventListener("submit", (event)=>{
-            event.preventDefault();
-          const formData= new FormData(event.target);
-          const url = formData.get("url");
-          const shortCode = formData.get("shortCode");
-          
-         
+document.getElementById("shorten-form").addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const url = formData.get("url");
+    const shortCode = formData.get("shortCode");
+
+    try {
+        const response = await fetch("/shorten", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ url, shortCode }),
         });
-    </script>
+
+        if (!response.ok) {
+            const error = await response.text();
+            alert(error);
+            return;
+        }
+
+        const { originalUrl, shortCode: code, shortenedUrl } = await response.json();
+        const ul = document.getElementById("shortened-urls");
+        const li = document.createElement("li");
+        li.innerHTML = `Original: ${originalUrl} | Shortened: <a href="${shortenedUrl}" target="_blank">${shortenedUrl}</a>`;
+        ul.appendChild(li);
+
+        event.target.reset(); // Clear form
+    } catch (error) {
+        alert("Failed to shorten URL");
+    }
+});
+</script>
 </body>
 </html>
